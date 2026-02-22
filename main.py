@@ -1,52 +1,60 @@
-import flet as ft
+import os
 
-def main(page: ft.Page):
-    # Configurações de estilo (App Independente)
-    page.title = "DOMER SYSTEM"
-    page.theme_mode = ft.ThemeMode.DARK
-    page.bgcolor = "#0a0a0a"  # Fundo preto estilo terminal
-    page.padding = 20
+def interpretador_dom():
+    # Nome do arquivo que contém os seus comandos
+    arquivo_script = "script.dom"
 
-    # Função para ler o seu arquivo .dom original
-    def ler_dom():
-        try:
-            with open("script.dom", "r", encoding="utf-8") as f:
-                return f.read()
-        except FileNotFoundError:
-            return "Erro: Arquivo script.dom não encontrado!"
+    # Verifica se o seu script existe na pasta
+    if not os.path.exists(arquivo_script):
+        print(f"❌ ERRO: O arquivo '{arquivo_script}' não foi encontrado!")
+        print("Crie um arquivo chamado script.dom na mesma pasta deste main.py.")
+        return
 
-    # Interface do Usuário
-    page.add(
-        ft.Column([
-            ft.Row([
-                ft.Icon(ft.icons.SHIELD_MOON, color="green", size=40),
-                ft.Text("DOMER MOBILE", size=24, weight="bold", color="green"),
-            ], alignment=ft.MainAxisAlignment.CENTER),
-            
-            ft.Divider(color="green", height=30),
-            
-            ft.Text("LOG DO SISTEMA .DOM:", size=14, color="white70"),
-            
-            # Área que mostra o conteúdo do seu .dom
-            ft.Container(
-                content=ft.Text(ler_dom(), font_family="monospace", color="#33ff33"),
-                bgcolor="#1a1a1a",
-                padding=15,
-                border_radius=10,
-                border=ft.border.all(1, "green"),
-                expand=True
-            ),
-            
-            ft.ElevatedButton(
-                "EXECUTAR COMANDO", 
-                icon=ft.icons.PLAY_ARROW,
-                style=ft.ButtonStyle(color="black", bgcolor="green"),
-                on_click=lambda _: print("Comando executado!")
-            )
-        ], expand=True)
-    )
+    print("\n" + "="*40)
+    print("☢️  DOMER OS - EXECUTANDO VIA TERMINAL ☢️")
+    print("="*40 + "\n")
 
-# Esse comando prepara o app para rodar no navegador do celular
+    try:
+        with open(arquivo_script, "r", encoding="utf-8") as f:
+            linhas = f.readlines()
+            
+            for i, linha in enumerate(linhas):
+                linha = linha.strip()
+                
+                # Pula linhas vazias ou comentários (que começam com #)
+                if not linha or linha.startswith("#"):
+                    continue
+                
+                # COMANDO: falar
+                if linha.startswith("falar"):
+                    try:
+                        # Extrai o texto que está entre aspas
+                        conteudo = linha.split('"')[1]
+                        print(f"📢 [SAÍDA]: {conteudo}")
+                    except IndexError:
+                        print(f"⚠️  ERRO DE SINTAXE (Linha {i+1}): Use falar \"seu texto\"")
+
+                # COMANDO: calcular
+                elif linha.startswith("calcular"):
+                    try:
+                        # Remove a palavra 'calcular' e faz a conta
+                        expressao = linha.replace("calcular", "").strip()
+                        resultado = eval(expressao)
+                        print(f"🔢 [CÁLCULO]: {expressao} = {resultado}")
+                    except Exception as e:
+                        print(f"⚠️  ERRO DE CÁLCULO (Linha {i+1}): {e}")
+                
+                # COMANDO DESCONHECIDO
+                else:
+                    print(f"❓ COMANDO NÃO RECONHECIDO (Linha {i+1}): {linha}")
+
+    except Exception as e:
+        print(f"❌ ERRO CRÍTICO AO LER O SCRIPT: {e}")
+
+    print("\n" + "="*40)
+    print("✅ EXECUÇÃO FINALIZADA COM SUCESSO")
+    print("="*40 + "\n")
+
 if __name__ == "__main__":
-    ft.app(target=main)
-  
+    interpretador_dom()
+                                                           

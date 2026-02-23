@@ -1,11 +1,8 @@
-definir x = 10
-definir y = 5
-perguntar "Qual o seu nome?" em usuario
-falar "Ola {usuario}"
-falar "X e {x}, Y e {y}"
-falar "Soma:"
-calcular x + y
-perguntar "Numero:" em n
-falar "Dobro:"
-calcular int(n) * 2
-falar "Fim."
+perguntar "Qual sua idade?" em entrada
+definir idade = int(entrada)
+se idade >= 18
+falar "Acesso liberado: Maior de idade"
+fimse
+se idade < 18
+falar "Acesso negado: Menor de idade"
+fimse

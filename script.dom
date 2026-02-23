@@ -1,4 +1,11 @@
-falar "DOMER MOBILE CARREGADA"
-calcular 500 * 2
-falar "SISTEMA OPERACIONAL ATIVO"
-
+definir x = 10
+definir y = 5
+perguntar "Qual o seu nome?" em usuario
+falar "Ola {usuario}"
+falar "X e {x}, Y e {y}"
+falar "Soma:"
+calcular x + y
+perguntar "Numero:" em n
+falar "Dobro:"
+calcular int(n) * 2
+falar "Fim."

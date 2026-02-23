@@ -1,8 +1,17 @@
-perguntar "Qual sua idade?" em entrada
-definir idade = int(entrada)
-se idade >= 18
-falar "Acesso liberado: Maior de idade"
+falar "--- SISTEMA DOMER ---"
+perguntar "Digite o valor A:" em a
+perguntar "Digite o valor B:" em b
+
+definir total = a + b
+
+falar "A soma de {a} com {b} e: {total}"
+
+se total > 100
+falar "Resultado alto!"
 fimse
-se idade < 18
-falar "Acesso negado: Menor de idade"
+
+se total <= 100
+falar "Resultado baixo!"
 fimse
+
+falar "Fim do programa."

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="imagem.png" width="160" alt="DOMER Logo">
+  <img src="images.png" width="160" alt="DOMER Logo">
 </p>
 
 <h1 align="center">DOMER Language</h1>
